@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complete, :archive]
 
   # GET /tasks
   # GET /tasks.json
@@ -70,6 +70,36 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url }
       format.json { head :no_content }
+    end
+  end
+
+  def complete
+    @task.complete = !(params[:task_complete].nil?)
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to tasks_url }
+        format.json { head :no_content }
+      else
+        flash[:error] = "Could not complete task!"
+        format.html { redirect_to tasks_url }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+
+    end
+  end
+
+  def archive
+    @task.archived = true
+    respond_to do |format|
+      if @task.save
+        flash[:notice] = "Task archived succcessfully! (Task ###{@task.id})"
+        format.html { redirect_to tasks_url }
+        format.json { head :no_content }
+      else
+        flash[:error] = "Could not archive task!"
+        format.html { redirect_to tasks_url }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
     end
   end
 

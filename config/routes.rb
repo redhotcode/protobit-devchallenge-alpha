@@ -1,5 +1,10 @@
 TasklistChallenge::Application.routes.draw do
-  resources :tasks, exclude: [:show]
+  resources :tasks, except: [:show] do
+    member do
+      get 'complete'
+      get 'archive'
+    end
+  end
   root 'tasks#index'
 
   get 'readme' => 'docs#readme', as: :readme

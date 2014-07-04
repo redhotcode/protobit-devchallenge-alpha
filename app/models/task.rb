@@ -10,5 +10,7 @@ class Task < ActiveRecord::Base
     define_method "#{attribute}!" do
       update_attribute(attribute, true)
     end
+
   end
+
 end

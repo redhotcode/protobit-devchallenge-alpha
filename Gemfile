@@ -44,6 +44,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development do
+  gem 'rails-erd'
+  gem "better_errors", ">= 0.2.0"
+  gem "binding_of_caller", ">= 0.6.8", :platform => :ruby
+  gem 'pry-rails'
+  gem 'pry-remote'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -38,13 +38,22 @@
         <tbody>
           <% @tasks.each do |task| %>
             <tr>
-              <td><%= check_box_tag :complete, :complete, task.complete, onclick: 'javascript:alert("Make me work!");' %>
+              <td>
+                <% #check_box_tag :complete, :complete, task.complete, onclick: 'javascript:alert("Make me work!");' %>
+                <%= check_box_tag :task_complete, :complete, task.complete,
+                      class: 'task-completion',
+                      data: {
+                        remote: true,
+                        url: url_for( :action => :complete, :id => task.id ),
+                        task_id: task.id
+                } %>
+              </td>
               <td><%= task.title.html_safe %></td>
               <td><%= task.description.html_safe %></td>
               <td>
                 <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default btn-sm' %>
                 <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-                <%= link_to 'Archive', '', class: 'btn btn-warning btn-sm', onclick: 'javascript:alert("Make me work!")' %>
+                <%= link_to 'Archive', archive_task_path(task), :remote => true, class: 'btn btn-warning btn-sm task-archival' %>
               </td>
             </tr>
           <% end %>
