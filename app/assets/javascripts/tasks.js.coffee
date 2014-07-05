@@ -1,6 +1,18 @@
-# You can use Javascript in tasks_javascript.js if you'd rather.
+MUTED_TEXT_CLASSNAME = "text-muted"
+HIDDEN_ATTRNAME = "hidden"
+# Notify the user that a task has been successfully marked as complete, stylizing the object appropriately, after
+# the operation has been performed remotely.
 $(document).on 'ajax:complete', '.task-completion', (e,x,o) ->
-  console.log "I will do something here to notifiy the user that an operation has completed."
-  console.log this.getAttribute("data-task-id")
+  console.log "TODO: Alert user of task completion"
+  ## Style completed tasks
+  if this.checked
+    $(this).parent().parent().addClass(MUTED_TEXT_CLASSNAME)
+  else
+    $(this).parent().parent().removeClass(MUTED_TEXT_CLASSNAME)
+
+
+# Notify the user that a task has been archived, and hide that row from the table, assuming the operation
+# has been performed remotely.
 $(document).on 'ajax:complete', '.task-archival', (e,x,o) ->
-  console.log "I will do something here to notify the user that an archive operation has been completed."
+  console.log "TODO: Alert user of task archival"
+  this.parent().parent().attr(HIDDEN_ATTRNAME, true)

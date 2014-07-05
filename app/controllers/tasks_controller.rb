@@ -73,6 +73,10 @@ class TasksController < ApplicationController
     end
   end
 
+  # GET /tasks/1/complete
+  # GET /tasks/1/complete.json
+  # Set the completion status of a given task.
+  ### Add complete support
   def complete
     @task.complete = !(params[:task_complete].nil?)
     respond_to do |format|
@@ -88,6 +92,10 @@ class TasksController < ApplicationController
     end
   end
 
+  # GET /tasks/1/archive
+  # GET /tasks/1/archive.json
+  # Set the archive attribute of a given task
+  ### Add archive support
   def archive
     @task.archived = true
     respond_to do |format|

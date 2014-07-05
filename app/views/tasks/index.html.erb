@@ -37,7 +37,7 @@
 
         <tbody>
           <% @tasks.each do |task| %>
-            <tr>
+            <tr class="<%= task_row_classes(task) %>">
               <td>
                 <% #check_box_tag :complete, :complete, task.complete, onclick: 'javascript:alert("Make me work!");' %>
                 <%= check_box_tag :task_complete, :complete, task.complete,
