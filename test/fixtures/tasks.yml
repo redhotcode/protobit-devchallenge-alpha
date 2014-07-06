@@ -23,3 +23,9 @@ ca:
   description: Completed Archived
   complete: true
   archived: true
+
+one:
+  title: First Real Task
+  description: Some arbitrary task goes here.
+  complete: false
+  archived: false
