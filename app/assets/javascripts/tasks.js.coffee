@@ -1,5 +1,4 @@
 MUTED_TEXT_CLASSNAME = "text-muted"
-HIDDEN_ATTRNAME = "hidden"
 # Notify the user that a task has been successfully marked as complete, stylizing the object appropriately, after
 # the operation has been performed remotely.
 $(document).on 'ajax:complete', '.task-completion', (e,x,o) ->
@@ -15,4 +14,4 @@ $(document).on 'ajax:complete', '.task-completion', (e,x,o) ->
 # has been performed remotely.
 $(document).on 'ajax:complete', '.task-archival', (e,x,o) ->
   console.log "TODO: Alert user of task archival"
-  this.parent().parent().attr(HIDDEN_ATTRNAME, true)
+  $(this).parent().parent().remove()

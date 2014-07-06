@@ -25,4 +25,15 @@ a {
     background-color: #F9F9F9;
     border-bottom: 1px solid #DDD;
   }
+
+  // Center 'Archived Tasks' Button
+  .panel-heading {
+    // Bootstrap's Grid layout is utilized here to center
+    // the button in the panel header, but we must add this
+    // rule to override the larger upper margin set forth
+    // in application.scss.
+    .row {
+      margin-top: 0px;
+    }
+  }
 }
