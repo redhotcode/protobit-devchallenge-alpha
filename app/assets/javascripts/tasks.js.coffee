@@ -14,4 +14,4 @@ $(document).on 'ajax:complete', '.task-completion', (e,x,o) ->
 # has been performed remotely.
 $(document).on 'ajax:complete', '.task-archival', (e,x,o) ->
   console.log "TODO: Alert user of task archival"
-  $(this).parent().parent().remove()
+  $(this).parents('tr').remove()
