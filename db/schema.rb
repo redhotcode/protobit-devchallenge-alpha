@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140529221905) do
+ActiveRecord::Schema.define(version: 20140706010416) do
 
   create_table "tasks", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.boolean  "complete"
-    t.boolean  "archived"
+    t.boolean  "complete",    default: false, null: false
+    t.boolean  "archived",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
