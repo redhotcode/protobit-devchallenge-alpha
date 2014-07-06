@@ -1,5 +1,36 @@
 # You can use Javascript in maps_javascript.js if you'd rather.
 
+my_map = null;
+
+initialize_map = ->
+  mapOptions = {
+    center: new google.maps.LatLng(-34.397, 150.644)
+    zoom: 8
+  }
+  map = new google.maps.Map document.getElementById('map'), mapOptions
+
+add_marker = (addr, map, color)->
+  address = { 'address': addr }
+  geocoder = new google.maps.Geocoder()
+  geocoder.geocode address, (r,s) ->
+    if s is google.maps.GeocoderStatus.OK
+      map.setCenter(r[0].geometry.location)
+      create_marker(r[0].geometry.location, color, map)
+    else
+      console.error "Geocode was unsuccessful because: " + s
+
+create_marker = (location, color, map) ->
+  marker = new google.maps.Marker {
+    position: location
+    map: map
+    icon: "http://www.google.com/intl/en_us/mapfiles/ms/micons/#{color}-dot.png"
+  }
+
+create_markers = (locations, color, map) ->
+  for location in locations
+    do (location) ->
+      add_marker location, map, color
+
 $(document).on 'page:load', (event)->
   plot_me =
     visited: [
@@ -22,3 +53,8 @@ $(document).on 'page:load', (event)->
       '800 S Fairmont Avenue #310, Pasadena, CA 91105'
       '1141 N Brand Blvd #306, Glendale, CA 91202'
     ]
+  my_map = initialize_map()
+  create_markers plot_me.visited, 'red', my_map
+  create_markers plot_me.revisit, 'orange', my_map
+  create_markers plot_me.unvisited, 'green', my_map
+

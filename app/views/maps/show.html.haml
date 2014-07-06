@@ -1,4 +1,14 @@
 .row
   .col-md-12
-    .panel.panel-default.map-view#map
-      [D] Add Google Maps Integration!
+    .panel.panel-default
+      .panel-heading
+        %code [D]
+        Add Google Maps Integration
+      .panel-body
+        .row
+          .map-view.col-md-12#map(style="height:500px;")
+
+- content_for :maps_script do
+  %script(type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAK7YZXhIqiC2Wsin2QRYwe0b1nXDa3x14")
+  :javascript
+
