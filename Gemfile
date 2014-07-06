@@ -52,6 +52,8 @@ group :development do
   gem 'pry-remote'
 end
 
+## Add Twitter Integration
+gem 'twitter'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

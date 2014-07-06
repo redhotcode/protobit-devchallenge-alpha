@@ -88,7 +88,10 @@ class TasksController < ApplicationController
         format.html { redirect_to tasks_url }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
-
+    end
+    ### Add Twitter Integration
+    if @task.complete
+      TWITTER_CLIENT.update(twitter_message_for @task )
     end
   end
 
@@ -121,4 +124,18 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:title, :description, :complete, :archived, :tags)
     end
+
+    def twitter_message_for(task)
+      message = "'$' was marked complete."
+      if task.title.length > (TWITTER_MAX_LENGTH - message.gsub('$','').length)
+        message.gsub! '$', "%s...%s"
+        lastWord = task.title.split.last
+        firstBit = task.title.slice(0,
+                    TWITTER_MAX_LENGTH - message.gsub("%s",'').length - lastWord.length)
+        return message % [firstBit, lastWord]
+      else
+        return message.gsub('$', task.title)
+      end
+    end
+
 end

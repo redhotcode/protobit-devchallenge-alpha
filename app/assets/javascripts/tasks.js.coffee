@@ -5,9 +5,9 @@ $(document).on 'ajax:complete', '.task-completion', (e,x,o) ->
   console.log "TODO: Alert user of task completion"
   ## Style completed tasks
   if this.checked
-    $(this).parent().parent().addClass(MUTED_TEXT_CLASSNAME)
+    $(this).parents('tr').addClass(MUTED_TEXT_CLASSNAME)
   else
-    $(this).parent().parent().removeClass(MUTED_TEXT_CLASSNAME)
+    $(this).parents('tr').removeClass(MUTED_TEXT_CLASSNAME)
 
 
 # Notify the user that a task has been archived, and hide that row from the table, assuming the operation
