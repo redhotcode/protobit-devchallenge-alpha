@@ -5,14 +5,14 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @task = Task.new
-
+    @query = nil
     if params.key?('q')
       @archived = nil
       @query = params['q']
 
       @tasks = Task.where(
-        Task.arel_table[:title].matches(@query).or(
-          Task.arel_table[:description].matches(@query)
+        Task.arel_table[:title].matches("%#{@query}%").or(
+          Task.arel_table[:description].matches("%#{@query}%")
         )
       )
     else
